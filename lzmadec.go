@@ -146,7 +146,7 @@ func parseEntryLines(lines []string) (Entry, error) {
 		case "block":
 			e.Block, err = strconv.Atoi(v)
 		default:
-			err = fmt.Errorf("unexpected entry line '%s'", name)
+			// ignore unknown lines
 		}
 		if err != nil {
 			return e, err

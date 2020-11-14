@@ -25,8 +25,6 @@ var (
 	// ErrNoEntries is returned if the archive has no files
 	ErrNoEntries = errors.New("no entries in 7z file")
 
-	errUnexpectedLines = errors.New("unexpected number of lines")
-
 	mu                 sync.Mutex
 	detectionStateOf7z int // 0 - not checked, 1 - checked and present, 2 - checked and not present
 )
@@ -109,10 +107,7 @@ func getEntryLines(scanner *bufio.Scanner) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	if len(res) == 9 || len(res) == 0 {
-		return res, nil
-	}
-	return nil, errUnexpectedLines
+	return res, nil
 }
 
 func parseEntryLines(lines []string) (Entry, error) {
